@@ -421,34 +421,51 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                icon: <RotateCw className="w-8 h-8 text-secondary-foreground" />,
+                icon: <RotateCw className="w-8 h-8 text-white" />,
                 title: "Movimiento 360°",
                 desc: "Se mueve automáticamente esquivando obstáculos, motivando al bebé a perseguirlo.",
-                color: "bg-secondary"
+                image: "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017996/6555157a76b10_hf0gww.jpg",
+                color: "from-secondary/80 to-secondary"
               },
               {
-                icon: <Lightbulb className="w-8 h-8 text-primary-foreground" />,
+                icon: <Lightbulb className="w-8 h-8 text-white" />,
                 title: "Luces LED Suaves",
                 desc: "Estimulación visual segura que capta la atención sin dañar la vista.",
-                color: "bg-primary"
+                image: "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017997/6555157a76b113_irfaws.jpg",
+                color: "from-primary/80 to-primary"
               },
               {
                 icon: <Music className="w-8 h-8 text-white" />,
                 title: "Música Dinámica",
                 desc: "Melodías alegres que desarrollan el sentido auditivo y el ritmo.",
-                color: "bg-[#4CAF50]" // Christmas Green
+                image: "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017998/6555157a76b1134_jd2rte.jpg",
+                color: "from-[#4CAF50]/80 to-[#4CAF50]"
               }
             ].map((feature, i) => (
               <motion.div
                 key={i}
                 whileHover={{ y: -10 }}
-                className="p-8 rounded-3xl border border-border bg-background shadow-lg hover:shadow-xl transition-all group"
+                className="relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all group h-[400px] flex flex-col justify-end"
               >
-                <div className={`w-16 h-16 ${feature.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform`}>
-                  {feature.icon}
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${feature.color} via-transparent to-transparent opacity-90`} />
+                  <div className="absolute inset-0 bg-black/20" />
                 </div>
-                <h3 className="text-2xl font-serif font-bold mb-3">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.desc}</p>
+
+                {/* Content */}
+                <div className="relative z-10 p-8 text-white">
+                  <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 border border-white/30">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-2xl font-serif font-bold mb-3">{feature.title}</h3>
+                  <p className="text-white/90 leading-relaxed font-medium">{feature.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
