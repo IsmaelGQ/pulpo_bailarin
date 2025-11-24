@@ -1,0 +1,82 @@
+Crea una landing page profesional, moderna y 100% responsive en HTML, CSS y JavaScript, usando el método AIDA para vender un producto llamado Pulpo Bailarín Musical.
+
+Características del producto:
+
+Juguete robot tipo medusa/pulpo con movimiento automático 360°
+
+Leves luces LED, música dinámica y tentáculos móviles
+
+Ayuda a estimular gateo, coordinación, exploración y desarrollo motor
+
+Material ABS, colores rojo/naranja/azul
+
+Funciona con pilas
+
+Ideal como regalo de Navidad y cumpleaños
+
+Perfecto para bebés de 1 a 4 años
+
+Estructura obligatoria (AIDA):
+A – Atención (Hero Section):
+
+Gran banner navideño con colores cálidos
+
+Imagen PNG del pulpo bailarín con fondo blanco (simular área para imagen)
+
+Título impactante: “El Juguete que Hará Reír y Moverse a tu Bebé”
+
+Subtítulo emocional: “Luces, música y movimiento para estimular el desarrollo de forma divertida”
+
+Botón CTA grande: “Quiero mi Pulpo Bailarín”
+
+I – Interés:
+
+Explica el problema: bebés aburridos, sin estímulo, poco movimiento
+
+Frase gatillo: “Muchos papás buscan cómo estimular el gateo de forma segura y divertida…”
+
+Incluir sección con íconos + beneficios
+
+D – Deseo:
+
+Sección emocional con fotos simuladas (placeholders) de un bebé peruano sonriendo mientras sigue al pulpo
+
+Beneficios detallados (desarrollo motor, coordinación, exploración, alegría, interacción sensorial)
+
+Bloque de texto tipo “antes y después”:
+
+Antes: aburrimiento, llanto, poco interés
+
+Después: risas, gateo, curiosidad, diversión
+
+Testimonios ficticios con estilo navideño
+
+A – Acción:
+
+Sección final con oferta navideña
+
+Caja de regalo navideña + pulpo dentro (simulada con fondos o imágenes)
+
+CTA repetitivo: “Comprar Ahora – Oferta de Navidad”
+
+Bloque de urgencia: pocas unidades, envío rápido
+
+Estilo visual:
+
+Tema navideño elegante, colores rojo, verde, dorado y blanco
+
+Estilo minimalista premium
+
+Sombra suave, bordes redondeados
+
+Animaciones ligeras (scroll, hover, fade-in)
+
+Extras:
+
+Navbar fijo
+
+Footer con WhatsApp “Comprar por WhatsApp”
+
+Código limpio, ordenado y comentado
+
+Usar solo HTML + CSS + JS (sin frameworks)
