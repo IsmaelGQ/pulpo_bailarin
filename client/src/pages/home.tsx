@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { 
@@ -132,6 +132,44 @@ const testimonials = [
     avatar: "MC"
   }
 ];
+
+const CountdownTimer = () => {
+  const [time, setTime] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    // Set deadline to 2 days from now for demo purposes
+    const deadline = new Date();
+    deadline.setHours(deadline.getHours() + 48);
+
+    const interval = setInterval(() => {
+      const now = new Date();
+      const diff = deadline.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      setTime({ days, hours, minutes, seconds });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="flex items-center gap-1 font-mono text-sm font-bold text-red-600">
+      <span>{String(time.days).padStart(2, '0')}d</span>:
+      <span>{String(time.hours).padStart(2, '0')}h</span>:
+      <span>{String(time.minutes).padStart(2, '0')}m</span>:
+      <span>{String(time.seconds).padStart(2, '0')}s</span>
+    </div>
+  );
+};
 
 const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (open: boolean) => void }) => {
   const [formData, setFormData] = useState({
@@ -267,8 +305,13 @@ export default function Home() {
       
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-b border-border/50 shadow-sm h-16 flex items-center justify-between px-4 md:px-8 max-w-7xl mx-auto w-full rounded-b-2xl mt-0 md:mt-2 md:w-[95%]">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4 md:gap-8">
           <span className="text-2xl font-serif font-bold text-primary tracking-tight">PulpoMusic</span>
+          <div className="hidden sm:flex items-center gap-2 bg-red-50 px-3 py-1 rounded-full border border-red-100">
+            <Clock className="w-4 h-4 text-red-500 animate-pulse" />
+            <span className="text-xs font-bold text-red-600 uppercase tracking-wider">Oferta termina en:</span>
+            <CountdownTimer />
+          </div>
         </div>
         <Button 
           size="sm" 
@@ -346,11 +389,14 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.2 }}
               className="relative flex justify-center order-1 md:order-2"
             >
-              <div className="relative z-10 w-full aspect-[4/5] md:aspect-square rounded-[2rem] overflow-hidden shadow-2xl">
-                <img 
-                  src={galleryImages[0]} 
-                  alt="Pulpo Bailarín Premium" 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+              <div className="relative z-10 w-full aspect-[4/5] md:aspect-square rounded-[2rem] overflow-hidden shadow-2xl bg-black">
+                <video 
+                  src="https://res.cloudinary.com/ddv1tjskb/video/upload/v1764020717/AQNxMt-ySn_J4pFmuewAxvM7DzRoF1X0Ja5oGn4v-ZehAPLbBGpBaSGgOfJhQQ4mEmm4YC3iyLkHF83ZNwg229D4jIL-4m2vvNkkH-acJQ_hulgae.mp4" 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  className="w-full h-full object-cover"
                 />
                 
                 {/* Glassmorphism Badge */}
