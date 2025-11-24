@@ -424,38 +424,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Gallery Section - NEW */}
-      <section className="py-20 bg-white overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Galería Exclusiva</h2>
-             <p className="text-muted-foreground max-w-2xl mx-auto">Descubre cada detalle de nuestro diseño premium, pensado para la seguridad y diversión de tu bebé.</p>
-          </div>
-          
-          <Carousel className="w-full max-w-5xl mx-auto" opts={{ align: "start", loop: true }}>
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {galleryImages.map((img, index) => (
-                <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1">
-                    <Card className="overflow-hidden border-0 shadow-none">
-                      <CardContent className="flex aspect-square items-center justify-center p-0 rounded-2xl overflow-hidden relative group">
-                        <img 
-                          src={img} 
-                          alt={`Vista ${index + 1}`} 
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="hidden md:flex" />
-            <CarouselNext className="hidden md:flex" />
-          </Carousel>
-        </div>
-      </section>
 
       {/* Interest Section */}
       <section id="features" className="py-20 bg-white">
