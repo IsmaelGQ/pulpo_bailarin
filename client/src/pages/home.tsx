@@ -28,6 +28,14 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
 
 // Assets
 import octopusHero from "@assets/pulpo_hero_real.jpg";
@@ -35,6 +43,16 @@ import octopusGif from "@assets/pulpo_dancing.gif";
 import bgChristmas from "@assets/generated_images/elegant_christmas_background_texture_with_red_and_gold_bokeh.png";
 import babyPlaying from "@assets/generated_images/happy_baby_playing_with_a_toy_on_the_floor_in_a_christmas_setting.png";
 import giftBox from "@assets/generated_images/magical_open_christmas_gift_box_with_light_emerging.png";
+
+const galleryImages = [
+  "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017997/6555157a76b113_irfaws.jpg",
+  "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017998/6555157a76b1134_jd2rte.jpg",
+  "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017997/6555157a76b11354_tfw6fq.jpg",
+  "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017996/6555157a76b10_hf0gww.jpg",
+  "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764018000/6555157a76b113543322_ueyqg7.jpg",
+  "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017996/6555157a76b11_vs7uth.jpg",
+  "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017999/6555157a76b1135433_dp6qtp.jpg"
+];
 
 // Mock Data for Testimonials
 const testimonials = [
@@ -257,10 +275,10 @@ export default function Home() {
       </nav>
 
       {/* Hero Section (Attention) */}
-      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden">
+      <section className="relative pt-32 pb-16 md:pt-40 md:pb-24 overflow-hidden bg-[#FDFBF7]">
         {/* Background Texture */}
-        <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
-           <img src={bgChristmas} alt="Background" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 z-0 opacity-5 pointer-events-none">
+           <img src={bgChristmas} alt="Background" className="w-full h-full object-cover grayscale" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -269,62 +287,119 @@ export default function Home() {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center md:text-left"
+              className="text-center md:text-left order-2 md:order-1"
             >
-              <div className="inline-block px-4 py-1.5 mb-6 bg-primary/10 text-primary rounded-full text-sm font-semibold uppercase tracking-wider border border-primary/20">
-                🎁 El Regalo Viral de Esta Navidad
+              <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-primary/5 text-primary rounded-full text-xs md:text-sm font-bold uppercase tracking-widest border border-primary/10">
+                <Star className="w-4 h-4 fill-primary" />
+                <span>Edición Limitada Navidad 2025</span>
               </div>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold leading-[1.1] text-foreground mb-6">
-                El Juguete que Hará <span className="text-primary italic">Reír</span> y <span className="text-primary italic">Moverse</span> a tu Bebé
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold leading-[1] text-foreground mb-6 tracking-tight">
+                El Regalo <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Perfecto.</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
-                Luces, música y movimiento automático para estimular el gateo y la coordinación de forma segura y divertida.
+              <p className="text-lg md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg mx-auto md:mx-0 font-light">
+                Diseñado para estimular, entretener y crear sonrisas. El compañero de desarrollo que tu bebé amará desde el primer día.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Button 
                   size="lg" 
                   onClick={() => setIsModalOpen(true)}
-                  className="bg-primary hover:bg-primary/90 text-white text-lg h-14 px-8 rounded-full shadow-xl shadow-primary/30 transition-all hover:scale-105"
+                  className="bg-primary hover:bg-primary/90 text-white text-lg h-14 px-10 rounded-full shadow-xl shadow-primary/20 transition-all hover:scale-105 font-medium"
                 >
-                  Quiero mi Pulpo Bailarín
+                  Comprar Ahora
                 </Button>
                 <Button 
                   variant="outline" 
                   size="lg" 
                   onClick={() => scrollToSection('features')}
-                  className="h-14 px-8 rounded-full border-primary/20 text-primary hover:bg-primary/5"
+                  className="h-14 px-10 rounded-full border-primary/20 text-primary hover:bg-primary/5 font-medium"
                 >
-                  Ver cómo funciona
+                  Ver Detalles
                 </Button>
+              </div>
+              
+              <div className="mt-10 flex items-center justify-center md:justify-start gap-6 text-sm text-muted-foreground">
+                 <div className="flex items-center gap-2">
+                    <div className="flex -space-x-2">
+                       {[1,2,3,4].map(i => (
+                         <div key={i} className="w-8 h-8 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
+                            <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="User" />
+                         </div>
+                       ))}
+                    </div>
+                    <div className="flex flex-col">
+                       <span className="font-bold text-foreground">4.9/5</span>
+                       <span className="text-xs">de 1,500+ reseñas</span>
+                    </div>
+                 </div>
               </div>
             </motion.div>
             
             <motion.div 
-              initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative flex justify-center"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="relative flex justify-center order-1 md:order-2"
             >
-              {/* Decorative blobs */}
-              <div className="absolute inset-0 bg-secondary/20 blur-[100px] rounded-full scale-75 animate-pulse" />
-              
-              <div className="relative z-10 w-full max-w-md aspect-square bg-white/40 backdrop-blur-sm rounded-[3rem] border border-white/60 shadow-2xl flex items-center justify-center p-4 overflow-hidden">
+              <div className="relative z-10 w-full aspect-[4/5] md:aspect-square rounded-[2rem] overflow-hidden shadow-2xl">
                 <img 
-                  src={octopusHero} 
-                  alt="Pulpo Bailarín Musical" 
-                  className="w-full h-full object-cover rounded-[2.5rem] drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                  src={galleryImages[0]} 
+                  alt="Pulpo Bailarín Premium" 
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
                 />
                 
-                {/* Floating badge */}
-                <div className="absolute bottom-8 right-8 bg-white p-4 rounded-2xl shadow-xl border border-border -rotate-6 animate-bounce duration-[3000ms]">
-                  <div className="flex flex-col items-center">
-                    <span className="text-3xl">⭐</span>
-                    <span className="font-bold text-xs uppercase tracking-wide mt-1 text-primary">Top Ventas</span>
+                {/* Glassmorphism Badge */}
+                <div className="absolute bottom-6 left-6 right-6 bg-white/20 backdrop-blur-md border border-white/30 p-4 rounded-xl text-white shadow-lg">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <p className="text-xs font-medium text-white/80 uppercase tracking-wider">Oferta Especial</p>
+                      <p className="text-xl font-serif font-bold">S/ 59.99</p>
+                    </div>
+                    <Button size="sm" onClick={() => setIsModalOpen(true)} className="bg-white text-primary hover:bg-white/90 rounded-full text-xs font-bold px-4">
+                      Pedir
+                    </Button>
                   </div>
                 </div>
               </div>
+              
+              {/* Background blobs */}
+              <div className="absolute -top-10 -right-10 w-64 h-64 bg-secondary/30 rounded-full blur-3xl -z-10" />
+              <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-primary/20 rounded-full blur-3xl -z-10" />
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Gallery Section - NEW */}
+      <section className="py-20 bg-white overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+             <h2 className="text-3xl md:text-5xl font-serif font-bold mb-4">Galería Exclusiva</h2>
+             <p className="text-muted-foreground max-w-2xl mx-auto">Descubre cada detalle de nuestro diseño premium, pensado para la seguridad y diversión de tu bebé.</p>
+          </div>
+          
+          <Carousel className="w-full max-w-5xl mx-auto" opts={{ align: "start", loop: true }}>
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {galleryImages.map((img, index) => (
+                <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                  <div className="p-1">
+                    <Card className="overflow-hidden border-0 shadow-none">
+                      <CardContent className="flex aspect-square items-center justify-center p-0 rounded-2xl overflow-hidden relative group">
+                        <img 
+                          src={img} 
+                          alt={`Vista ${index + 1}`} 
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex" />
+            <CarouselNext className="hidden md:flex" />
+          </Carousel>
         </div>
       </section>
 
