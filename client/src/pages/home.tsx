@@ -116,31 +116,88 @@ const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (o
     department: "",
     province: "",
     district: "",
-    address: ""
+    address: "",
+    quantity: "1",
+    color: "Verde"
   });
+
+  const prices = {
+    "1": { price: 59.99, oldPrice: 99.99, label: "1 Unidad" },
+    "2": { price: 89.99, oldPrice: 159.99, label: "2 Unidades" },
+    "3": { price: 129.99, oldPrice: 199.99, label: "3 Unidades" }
+  };
+
+  const colors = ["Verde", "Rosa", "Amarillo"];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const message = `Hola, quiero pedir el Pulpo Bailarín con la oferta navideña. 🐙🎁%0A%0A*Mis Datos:*%0A👤 Nombre: ${formData.fullName}%0A📍 Departamento: ${formData.department}%0A🏙️ Provincia: ${formData.province}%0A🏘️ Distrito: ${formData.district}%0A🏠 Dirección/Ref: ${formData.address}`;
+    const selectedPrice = prices[formData.quantity as keyof typeof prices];
+    const message = `Hola, quiero pedir el Pulpo Bailarín con la oferta navideña. 🐙🎁%0A%0A*Mi Pedido:*%0A📦 Cantidad: ${selectedPrice.label}%0A🎨 Color: ${formData.color}%0A💰 Precio Total: S/ ${selectedPrice.price}%0A%0A*Mis Datos:*%0A👤 Nombre: ${formData.fullName}%0A📍 Departamento: ${formData.department}%0A🏙️ Provincia: ${formData.province}%0A🏘️ Distrito: ${formData.district}%0A🏠 Dirección/Ref: ${formData.address}`;
     window.open(`https://wa.me/51954597114?text=${message}`, '_blank');
     onOpenChange(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] bg-white">
+      <DialogContent className="sm:max-w-[500px] bg-white max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl font-serif text-primary text-center">¡Casi es tuyo! 🎁</DialogTitle>
           <DialogDescription className="text-center text-muted-foreground">
-            Completa tus datos para coordinar el envío por WhatsApp. Pagas al confirmar.
+            Personaliza tu pedido y completa tus datos.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+          
+          {/* Quantity Selection */}
           <div className="grid gap-2">
+            <Label>Elige la Oferta</Label>
+            <div className="grid gap-2">
+              {Object.entries(prices).map(([qty, details]) => (
+                <div key={qty} className={`relative flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.quantity === qty ? 'border-primary bg-primary/5' : 'border-gray-100 hover:border-primary/30'}`} onClick={() => setFormData({...formData, quantity: qty})}>
+                  <div className="flex items-center gap-3">
+                    <input 
+                      type="radio" 
+                      name="quantity" 
+                      value={qty} 
+                      checked={formData.quantity === qty}
+                      onChange={handleChange}
+                      className="w-4 h-4 text-primary border-gray-300 focus:ring-primary"
+                    />
+                    <div className="flex flex-col">
+                      <span className="font-bold text-gray-900">{details.label}</span>
+                      {qty === "2" && <span className="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded-full w-fit">¡Más Vendido!</span>}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="font-bold text-lg text-primary">S/ {details.price}</div>
+                    <div className="text-sm text-gray-400 line-through">S/ {details.oldPrice}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Color Selection */}
+          <div className="grid gap-2">
+            <Label>Elige el Color</Label>
+            <div className="flex gap-3">
+              {colors.map((color) => (
+                <div 
+                  key={color}
+                  onClick={() => setFormData({...formData, color})}
+                  className={`flex-1 p-3 rounded-xl border-2 cursor-pointer text-center transition-all ${formData.color === color ? 'border-primary bg-primary text-white' : 'border-gray-100 hover:border-gray-200'}`}
+                >
+                  <div className="font-medium text-sm">{color}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-2 mt-2">
             <Label htmlFor="fullName">Nombre Completo</Label>
             <Input id="fullName" name="fullName" required placeholder="Ej. Juan Pérez" value={formData.fullName} onChange={handleChange} />
           </div>
@@ -163,7 +220,7 @@ const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (o
             <Textarea id="address" name="address" required placeholder="Av. Larco 123, frente al parque..." value={formData.address} onChange={handleChange} />
           </div>
           <Button type="submit" size="lg" className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold gap-2 mt-2">
-            <MessageCircle className="w-5 h-5" /> Enviar Pedido a WhatsApp
+            <MessageCircle className="w-5 h-5" /> Pedir Ahora (S/ {prices[formData.quantity as keyof typeof prices].price})
           </Button>
         </form>
       </DialogContent>
@@ -476,8 +533,8 @@ export default function Home() {
                 </p>
                 
                 <div className="flex items-baseline gap-4 mb-8 justify-center md:justify-start">
-                  <span className="text-5xl font-bold text-secondary">S/ 89.00</span>
-                  <span className="text-2xl text-white/50 line-through decoration-2">S/ 140.00</span>
+                  <span className="text-5xl font-bold text-secondary">S/ 59.99</span>
+                  <span className="text-2xl text-white/50 line-through decoration-2">S/ 99.99</span>
                 </div>
 
                 <div className="flex flex-col gap-4">
