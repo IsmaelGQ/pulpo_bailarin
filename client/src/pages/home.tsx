@@ -47,6 +47,8 @@ import bgChristmas from "@assets/generated_images/elegant_christmas_background_t
 import babyPlaying from "@assets/generated_images/happy_baby_playing_with_a_toy_on_the_floor_in_a_christmas_setting.png";
 import giftBox from "@assets/generated_images/magical_open_christmas_gift_box_with_light_emerging.png";
 
+const textureBg = "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764019504/sabri-tuzcu-rYnQwRsNpE0-unsplash_ihkdgx.jpg";
+
 const galleryImages = [
   "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017997/6555157a76b113_irfaws.jpg",
   "https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017998/6555157a76b1134_jd2rte.jpg",
@@ -540,8 +542,11 @@ export default function Home() {
       </section>
 
       {/* Shipping Section - NEW */}
-      <section className="py-20 bg-[#FDFBF7]">
-        <div className="container mx-auto px-4">
+      <section className="py-20 bg-[#FDFBF7] relative">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+            <img src={textureBg} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
              <div className="order-2 md:order-1">
                 <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-green-100 text-green-700 rounded-full text-sm font-bold uppercase tracking-widest">
@@ -641,8 +646,11 @@ export default function Home() {
       </section>
 
       {/* Facebook Testimonials Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4 max-w-4xl">
+      <section className="py-20 bg-gray-50 relative">
+        <div className="absolute inset-0 opacity-10 pointer-events-none mix-blend-multiply">
+            <img src={textureBg} alt="" className="w-full h-full object-cover" />
+        </div>
+        <div className="container mx-auto px-4 max-w-4xl relative z-10">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-foreground">
               Mamás Felices Comparten su Experiencia

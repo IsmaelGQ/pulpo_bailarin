@@ -27,7 +27,7 @@
   --radius-lg: var(--radius);
   
   --font-sans: "Outfit", sans-serif;
-  --font-serif: "Playfair Display", serif;
+  --font-serif: "Outfit", sans-serif;
 }
 
 @layer base {
