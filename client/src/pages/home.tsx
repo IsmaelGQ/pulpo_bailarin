@@ -802,7 +802,7 @@ export default function Home() {
                   transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                 >
                   <img 
-                    src={giftBox} 
+                    src="https://res.cloudinary.com/ddv1tjskb/image/upload/v1764021442/pngwing.com_eu0rmb.png" 
                     alt="Caja de regalo mágica" 
                     className="w-full drop-shadow-2xl transform scale-110"
                   />
