@@ -751,15 +751,19 @@ export default function Home() {
       </section>
 
       {/* Action Section (Offer) */}
-      <section id="offer" className="py-24 relative bg-primary text-white overflow-hidden">
-        {/* Decorative Background Elements */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-           <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-           <div className="absolute bottom-10 right-10 w-64 h-64 bg-secondary/20 rounded-full blur-3xl" />
+      <section id="offer" className="py-24 relative text-white overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+           <img 
+             src="https://res.cloudinary.com/ddv1tjskb/image/upload/v1764021180/elena-mozhvilo-zpXN5br96DU-unsplash_sff1xe.jpg" 
+             alt="Christmas Background" 
+             className="w-full h-full object-cover"
+           />
+           <div className="absolute inset-0 bg-black/60" /> 
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-5xl mx-auto bg-white/10 backdrop-blur-sm rounded-[3rem] border border-white/20 p-8 md:p-12 shadow-2xl">
+          <div className="max-w-5xl mx-auto bg-white/10 backdrop-blur-md rounded-[3rem] border border-white/20 p-8 md:p-12 shadow-2xl">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="order-2 md:order-1 text-center md:text-left">
                 <div className="inline-flex items-center gap-2 px-4 py-1 bg-secondary text-secondary-foreground rounded-full text-sm font-bold mb-6 animate-pulse">
@@ -768,8 +772,8 @@ export default function Home() {
                 <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
                   Regala Alegría esta Navidad
                 </h2>
-                <p className="text-white/80 text-lg mb-8">
-                  El paquete incluye: Pulpo Bailarín + Pilas de Regalo + Envoltorio Navideño.
+                <p className="text-white/90 text-lg mb-8 font-medium">
+                  El paquete incluye: Pulpo Bailarín + 3 Pilas de Regalo.
                 </p>
                 
                 <div className="flex items-baseline gap-4 mb-8 justify-center md:justify-start">
