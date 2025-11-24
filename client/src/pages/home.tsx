@@ -1,29 +1,178 @@
+import { useState } from "react";
 import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 import { 
   Music, 
   Lightbulb, 
   RotateCw, 
-  Baby, 
   Gift, 
   Check, 
   X, 
   MessageCircle, 
   Star, 
-  Clock 
+  Clock,
+  ThumbsUp,
+  MessageSquare,
+  Share2,
+  MapPin
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 
 // Assets
-import octopusHero from "@assets/generated_images/product_shot_of_a_cute_musical_dancing_octopus_toy_on_white_background.png";
+import octopusHero from "@assets/pulpo_hero_real.jpg";
+import octopusGif from "@assets/pulpo_dancing.gif";
 import bgChristmas from "@assets/generated_images/elegant_christmas_background_texture_with_red_and_gold_bokeh.png";
 import babyPlaying from "@assets/generated_images/happy_baby_playing_with_a_toy_on_the_floor_in_a_christmas_setting.png";
 import giftBox from "@assets/generated_images/magical_open_christmas_gift_box_with_light_emerging.png";
 
+// Mock Data for Testimonials
+const testimonials = [
+  {
+    name: "Ana María Flores",
+    time: "hace 2 horas",
+    comment: "¡Me encantó! Llegó súper rápido a Lima y a mi bebé le fascina. Lo mejor es que se mueve solo y esquiva los muebles. 100% recomendado para Navidad. 🎄",
+    likes: 24,
+    avatar: "AF"
+  },
+  {
+    name: "Carla Mendoza",
+    time: "hace 5 horas",
+    comment: "Estaba buscando algo para estimular el gateo de mi hijo de 8 meses y esto fue la solución mágica. Se ríe a carcajadas cuando el pulpo se escapa.",
+    likes: 18,
+    avatar: "CM"
+  },
+  {
+    name: "Patricia Torres",
+    time: "hace 1 día",
+    comment: "La calidad es muy buena, se nota que es resistente porque mi hija ya lo tiró un par de veces y sigue perfecto. ¡Gracias por el envío rápido!",
+    likes: 45,
+    avatar: "PT"
+  },
+  {
+    name: "Lucía Vargas",
+    time: "hace 1 día",
+    comment: "Lo compré para mi sobrino y fue el éxito de la fiesta. Todos los niños querían jugar con el pulpo. Muy divertido y la música es pegajosa.",
+    likes: 32,
+    avatar: "LV"
+  },
+  {
+    name: "Fiorella Castillo",
+    time: "hace 2 días",
+    comment: "Excelente atención por WhatsApp. Tenía dudas sobre el envío a provincia (soy de Arequipa) y me explicaron todo. Llegó en 2 días.",
+    likes: 12,
+    avatar: "FC"
+  },
+  {
+    name: "Gabriela Rivas",
+    time: "hace 3 días",
+    comment: "¡Es adorable! 😍 Las luces no son fuertes así que no molestan a los ojos del bebé. Muy bien pensado el diseño.",
+    likes: 56,
+    avatar: "GR"
+  },
+  {
+    name: "Rocío Quispe",
+    time: "hace 3 días",
+    comment: "Precio justo para lo que hace. He visto otros juguetes más caros que no hacen ni la mitad. Vale la pena totalmente.",
+    likes: 9,
+    avatar: "RQ"
+  },
+  {
+    name: "Vanessa López",
+    time: "hace 4 días",
+    comment: "Mi bebé de 1 año no quería gatear y con esto se animó en una semana. ¡Estoy feliz! Gracias PulpoMusic.",
+    likes: 89,
+    avatar: "VL"
+  },
+  {
+    name: "Katia Silva",
+    time: "hace 5 días",
+    comment: "Compré 2, uno para mi hijo y otro para regalo. La presentación de la caja es bonita, lista para regalar.",
+    likes: 15,
+    avatar: "KS"
+  },
+  {
+    name: "Marisol Chávez",
+    time: "hace 1 semana",
+    comment: "Funciona perfecto en piso laminado y alfombra delgada. Muy buena compra.",
+    likes: 21,
+    avatar: "MC"
+  }
+];
+
+const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (open: boolean) => void }) => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    department: "",
+    province: "",
+    district: "",
+    address: ""
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const message = `Hola, quiero pedir el Pulpo Bailarín con la oferta navideña. 🐙🎁%0A%0A*Mis Datos:*%0A👤 Nombre: ${formData.fullName}%0A📍 Departamento: ${formData.department}%0A🏙️ Provincia: ${formData.province}%0A🏘️ Distrito: ${formData.district}%0A🏠 Dirección/Ref: ${formData.address}`;
+    window.open(`https://wa.me/51954597114?text=${message}`, '_blank');
+    onOpenChange(false);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-[425px] bg-white">
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-serif text-primary text-center">¡Casi es tuyo! 🎁</DialogTitle>
+          <DialogDescription className="text-center text-muted-foreground">
+            Completa tus datos para coordinar el envío por WhatsApp. Pagas al confirmar.
+          </DialogDescription>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+          <div className="grid gap-2">
+            <Label htmlFor="fullName">Nombre Completo</Label>
+            <Input id="fullName" name="fullName" required placeholder="Ej. Juan Pérez" value={formData.fullName} onChange={handleChange} />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-2">
+              <Label htmlFor="department">Departamento</Label>
+              <Input id="department" name="department" required placeholder="Ej. Lima" value={formData.department} onChange={handleChange} />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="province">Provincia</Label>
+              <Input id="province" name="province" required placeholder="Ej. Lima" value={formData.province} onChange={handleChange} />
+            </div>
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="district">Distrito</Label>
+            <Input id="district" name="district" required placeholder="Ej. Miraflores" value={formData.district} onChange={handleChange} />
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="address">Dirección Exacta / Referencia</Label>
+            <Textarea id="address" name="address" required placeholder="Av. Larco 123, frente al parque..." value={formData.address} onChange={handleChange} />
+          </div>
+          <Button type="submit" size="lg" className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold gap-2 mt-2">
+            <MessageCircle className="w-5 h-5" /> Enviar Pedido a WhatsApp
+          </Button>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
 export default function Home() {
-  const [, setLocation] = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -34,14 +183,16 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-primary/20">
+      <PurchaseModal open={isModalOpen} onOpenChange={setIsModalOpen} />
+      
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-border/50 shadow-sm h-16 flex items-center justify-between px-4 md:px-8 max-w-7xl mx-auto w-full rounded-b-2xl mt-0 md:mt-2 md:w-[95%]">
+      <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-b border-border/50 shadow-sm h-16 flex items-center justify-between px-4 md:px-8 max-w-7xl mx-auto w-full rounded-b-2xl mt-0 md:mt-2 md:w-[95%]">
         <div className="flex items-center gap-2">
           <span className="text-2xl font-serif font-bold text-primary tracking-tight">PulpoMusic</span>
         </div>
         <Button 
           size="sm" 
-          onClick={() => scrollToSection('offer')}
+          onClick={() => setIsModalOpen(true)}
           className="hidden md:flex bg-primary hover:bg-primary/90 text-white rounded-full font-medium shadow-lg shadow-primary/20"
         >
           Comprar Ahora
@@ -75,7 +226,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 <Button 
                   size="lg" 
-                  onClick={() => scrollToSection('offer')}
+                  onClick={() => setIsModalOpen(true)}
                   className="bg-primary hover:bg-primary/90 text-white text-lg h-14 px-8 rounded-full shadow-xl shadow-primary/30 transition-all hover:scale-105"
                 >
                   Quiero mi Pulpo Bailarín
@@ -100,15 +251,15 @@ export default function Home() {
               {/* Decorative blobs */}
               <div className="absolute inset-0 bg-secondary/20 blur-[100px] rounded-full scale-75 animate-pulse" />
               
-              <div className="relative z-10 w-full max-w-md aspect-square bg-white/40 backdrop-blur-sm rounded-[3rem] border border-white/60 shadow-2xl flex items-center justify-center p-8">
+              <div className="relative z-10 w-full max-w-md aspect-square bg-white/40 backdrop-blur-sm rounded-[3rem] border border-white/60 shadow-2xl flex items-center justify-center p-4 overflow-hidden">
                 <img 
                   src={octopusHero} 
                   alt="Pulpo Bailarín Musical" 
-                  className="w-full h-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover rounded-[2.5rem] drop-shadow-2xl hover:scale-105 transition-transform duration-500"
                 />
                 
                 {/* Floating badge */}
-                <div className="absolute -top-4 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-border rotate-12 animate-bounce duration-[3000ms]">
+                <div className="absolute bottom-8 right-8 bg-white p-4 rounded-2xl shadow-xl border border-border -rotate-6 animate-bounce duration-[3000ms]">
                   <div className="flex flex-col items-center">
                     <span className="text-3xl">⭐</span>
                     <span className="font-bold text-xs uppercase tracking-wide mt-1 text-primary">Top Ventas</span>
@@ -169,7 +320,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Desire Section (Emotional) */}
+      {/* Desire Section (Emotional) + GIF */}
       <section className="py-20 bg-muted/30 relative overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -180,14 +331,28 @@ export default function Home() {
               className="relative"
             >
               <div className="absolute inset-0 bg-primary/5 rounded-[2rem] rotate-3 scale-105" />
-              <img 
-                src={babyPlaying} 
-                alt="Bebé feliz jugando" 
-                className="relative rounded-[2rem] shadow-2xl w-full aspect-[4/3] object-cover border-4 border-white"
-              />
+              
+              {/* Image Grid with GIF */}
+              <div className="grid grid-cols-2 gap-4 relative z-10">
+                <img 
+                  src={babyPlaying} 
+                  alt="Bebé feliz jugando" 
+                  className="rounded-2xl shadow-lg w-full h-64 object-cover border-2 border-white col-span-2"
+                />
+                <div className="col-span-2 relative rounded-2xl overflow-hidden border-2 border-white shadow-lg h-64 bg-black">
+                   <img 
+                    src={octopusGif} 
+                    alt="Pulpo bailando gif" 
+                    className="w-full h-full object-contain"
+                  />
+                  <div className="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-md">
+                    En acción 🎥
+                  </div>
+                </div>
+              </div>
               
               {/* Quote card */}
-              <div className="absolute -bottom-8 md:-right-8 left-8 right-8 md:left-auto md:w-80 bg-white p-6 rounded-xl shadow-xl border border-border/50">
+              <div className="absolute -bottom-8 md:-right-8 left-8 right-8 md:left-auto md:w-80 bg-white p-6 rounded-xl shadow-xl border border-border/50 z-20">
                 <div className="flex gap-1 mb-2">
                   {[1,2,3,4,5].map(s => <Star key={s} className="w-4 h-4 fill-secondary text-secondary" />)}
                 </div>
@@ -196,7 +361,7 @@ export default function Home() {
               </div>
             </motion.div>
 
-            <div>
+            <div className="pt-10 md:pt-0">
               <h2 className="text-3xl md:text-5xl font-serif font-bold mb-8 leading-tight">
                 Más que un juguete, una herramienta de desarrollo
               </h2>
@@ -232,6 +397,62 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Facebook Testimonials Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-foreground">
+              Mamás Felices Comparten su Experiencia
+            </h2>
+            <div className="flex items-center justify-center gap-2 text-primary">
+              <ThumbsUp className="w-5 h-5 fill-primary" />
+              <span className="font-medium">Más de 1,500 clientes satisfechos</span>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+             <div className="bg-[#F0F2F5] px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                <span className="font-semibold text-gray-700">Comentarios recientes</span>
+                <div className="flex items-center gap-2 text-gray-500 text-sm">
+                   <span>Ordenar por:</span>
+                   <span className="font-bold text-gray-700">Más relevantes ▼</span>
+                </div>
+             </div>
+             <div className="p-6 space-y-6">
+                {testimonials.map((t, i) => (
+                  <div key={i} className="flex gap-3">
+                     <div className="flex-shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white font-bold text-sm shadow-md">
+                           {t.avatar}
+                        </div>
+                     </div>
+                     <div className="flex-1">
+                        <div className="bg-[#F0F2F5] rounded-2xl rounded-tl-none px-4 py-3 inline-block">
+                           <h4 className="font-bold text-gray-900 text-sm hover:underline cursor-pointer">{t.name}</h4>
+                           <p className="text-gray-800 text-[0.95rem] mt-1 leading-snug">{t.comment}</p>
+                        </div>
+                        <div className="flex items-center gap-4 mt-1 ml-2 text-xs text-gray-500 font-medium">
+                           <button className="hover:underline">Me gusta</button>
+                           <button className="hover:underline">Responder</button>
+                           <span>{t.time}</span>
+                        </div>
+                     </div>
+                     <div className="hidden sm:flex flex-col items-center justify-center gap-1 text-gray-400">
+                        <ThumbsUp className="w-4 h-4" />
+                        <span className="text-xs">{t.likes}</span>
+                     </div>
+                  </div>
+                ))}
+             </div>
+             <div className="p-4 border-t border-gray-200 bg-gray-50 text-center">
+                <Button variant="ghost" className="w-full text-primary font-bold">
+                   Ver 142 comentarios más
+                </Button>
+             </div>
+          </div>
+        </div>
+      </section>
+
       {/* Action Section (Offer) */}
       <section id="offer" className="py-24 relative bg-primary text-white overflow-hidden">
         {/* Decorative Background Elements */}
@@ -263,7 +484,7 @@ export default function Home() {
                   <Button 
                     size="lg" 
                     className="w-full md:w-auto bg-white text-primary hover:bg-white/90 text-xl h-16 rounded-full font-bold shadow-xl transition-transform hover:scale-105 flex items-center justify-center gap-3"
-                    onClick={() => window.open('https://wa.me/51999999999?text=Hola,%20quiero%20el%20Pulpo%20Bailarín%20con%20la%20oferta%20navideña', '_blank')}
+                    onClick={() => setIsModalOpen(true)}
                   >
                     <Gift className="w-6 h-6" /> Comprar Ahora
                   </Button>
@@ -335,7 +556,7 @@ export default function Home() {
       {/* Floating WhatsApp Button (Sticky Footer) */}
       <div className="fixed bottom-6 right-6 z-50">
         <Button 
-          onClick={() => window.open('https://wa.me/51999999999', '_blank')}
+          onClick={() => setIsModalOpen(true)}
           className="bg-[#25D366] hover:bg-[#128C7E] text-white rounded-full w-14 h-14 shadow-lg flex items-center justify-center p-0 animate-bounce-slow"
         >
           <MessageCircle className="w-8 h-8" />
