@@ -289,6 +289,8 @@ const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (o
   );
 };
 
+import { StarsAnimation } from "@/components/ui/stars-animation";
+
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -301,6 +303,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background font-sans selection:bg-primary/20">
+      <StarsAnimation />
       <PurchaseModal open={isModalOpen} onOpenChange={setIsModalOpen} />
       
       {/* Navbar */}
