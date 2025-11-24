@@ -464,23 +464,13 @@ export default function Home() {
             >
               <div className="absolute inset-0 bg-primary/5 rounded-[2rem] rotate-3 scale-105" />
               
-              {/* Image Grid with GIF */}
-              <div className="grid grid-cols-2 gap-4 relative z-10">
+              {/* Before/After Image */}
+              <div className="relative z-10">
                 <img 
-                  src={babyPlaying} 
-                  alt="Bebé feliz jugando" 
-                  className="rounded-2xl shadow-lg w-full h-64 object-cover border-2 border-white col-span-2"
+                  src="https://res.cloudinary.com/ddv1tjskb/image/upload/v1764018694/Screenshot_6_kylcor.jpg" 
+                  alt="Comparación Antes y Después" 
+                  className="rounded-2xl shadow-xl w-full object-cover border-2 border-white"
                 />
-                <div className="col-span-2 relative rounded-2xl overflow-hidden border-2 border-white shadow-lg h-64 bg-black">
-                   <img 
-                    src={octopusGif} 
-                    alt="Pulpo bailando gif" 
-                    className="w-full h-full object-contain"
-                  />
-                  <div className="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2 py-1 rounded backdrop-blur-md">
-                    En acción 🎥
-                  </div>
-                </div>
               </div>
               
               {/* Quote card */}
