@@ -800,11 +800,12 @@ export default function Home() {
                 <motion.div
                   animate={{ y: [0, -10, 0] }}
                   transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                  className="flex justify-center"
                 >
                   <img 
                     src="https://res.cloudinary.com/ddv1tjskb/image/upload/v1764021442/pngwing.com_eu0rmb.png" 
                     alt="Caja de regalo mágica" 
-                    className="w-full drop-shadow-2xl transform scale-110"
+                    className="w-3/4 drop-shadow-2xl"
                   />
                 </motion.div>
                 
