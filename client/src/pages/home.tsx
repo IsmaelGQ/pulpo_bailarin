@@ -14,7 +14,10 @@ import {
   ThumbsUp,
   MessageSquare,
   Share2,
-  MapPin
+  MapPin,
+  Truck,
+  PackageCheck,
+  ShieldCheck
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -515,6 +518,107 @@ export default function Home() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Shipping Section - NEW */}
+      <section className="py-20 bg-[#FDFBF7]">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+             <div className="order-2 md:order-1">
+                <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-green-100 text-green-700 rounded-full text-sm font-bold uppercase tracking-widest">
+                  <Truck className="w-4 h-4" />
+                  <span>Envíos a Todo el Perú</span>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6 leading-tight">
+                  Llegamos a la puerta de tu casa, <span className="text-primary">estés donde estés.</span>
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+                  Nos encargamos de que tu pedido llegue seguro y rápido. Trabajamos con las mejores agencias de envío para garantizar tu entrega.
+                </p>
+                
+                <div className="space-y-6 mb-8">
+                  <div className="flex gap-4 items-start">
+                     <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600">
+                        <Clock className="w-6 h-6" />
+                     </div>
+                     <div>
+                        <h4 className="font-bold text-lg">Rapidez Garantizada</h4>
+                        <p className="text-muted-foreground">Lima: 24 horas. Provincia: 48-72 horas.</p>
+                     </div>
+                  </div>
+                  <div className="flex gap-4 items-start">
+                     <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 text-green-600">
+                        <ShieldCheck className="w-6 h-6" />
+                     </div>
+                     <div>
+                        <h4 className="font-bold text-lg">Compra Segura</h4>
+                        <p className="text-muted-foreground">Emitimos boleta y te enviamos foto de tu guía de remisión.</p>
+                     </div>
+                  </div>
+                  <div className="flex gap-4 items-start">
+                     <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center flex-shrink-0 text-yellow-600">
+                        <PackageCheck className="w-6 h-6" />
+                     </div>
+                     <div>
+                        <h4 className="font-bold text-lg">Embalaje Protegido</h4>
+                        <p className="text-muted-foreground">Tu pulpo viaja protegido para llegar en perfectas condiciones.</p>
+                     </div>
+                  </div>
+                </div>
+
+                <Button 
+                  size="lg" 
+                  onClick={() => setIsModalOpen(true)}
+                  className="bg-primary hover:bg-primary/90 text-white text-lg h-14 px-10 rounded-full shadow-xl shadow-primary/20 w-full md:w-auto"
+                >
+                  Hacer mi Pedido Ahora
+                </Button>
+             </div>
+
+             <div className="order-1 md:order-2 relative">
+                {/* Image Collage */}
+                <div className="relative z-10 grid grid-cols-2 gap-4">
+                   <motion.div 
+                     whileHover={{ y: -5 }}
+                     className="col-span-2 rounded-2xl overflow-hidden shadow-xl border-4 border-white rotate-1"
+                   >
+                      <img 
+                        src="https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017950/WhatsApp_Image_2025-11-24_at_15.58.04_vjc1x3.jpg" 
+                        alt="Envíos a todo el Perú" 
+                        className="w-full h-64 object-cover"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                         <p className="text-white font-bold text-sm flex items-center gap-2">
+                           <Check className="w-4 h-4 text-green-400" /> Envíos Diarios a Provincia
+                         </p>
+                      </div>
+                   </motion.div>
+                   
+                   <motion.div 
+                     whileHover={{ y: -5 }}
+                     className="col-span-2 md:col-span-1 rounded-2xl overflow-hidden shadow-xl border-4 border-white -rotate-2 md:translate-y-[-20px]"
+                   >
+                      <img 
+                        src="https://res.cloudinary.com/ddv1tjskb/image/upload/v1764017949/WhatsApp_Image_2025-11-24_at_15.58.04_1_j4iebx.jpg" 
+                        alt="Comprobantes de Envío" 
+                        className="w-full h-48 object-cover"
+                      />
+                   </motion.div>
+
+                   <div className="hidden md:flex col-span-1 bg-white rounded-2xl shadow-xl border-4 border-white p-6 flex-col justify-center items-center text-center rotate-2">
+                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-3">
+                         <MapPin className="w-8 h-8 text-green-600" />
+                      </div>
+                      <h4 className="font-bold text-gray-900">Cobertura Total</h4>
+                      <p className="text-xs text-gray-500 mt-1">Llegamos a todos los distritos de Lima y provincias del Perú.</p>
+                   </div>
+                </div>
+
+                {/* Decorative Background */}
+                <div className="absolute inset-0 bg-secondary/10 rounded-full blur-3xl -z-10 transform scale-110" />
+             </div>
           </div>
         </div>
       </section>
