@@ -308,12 +308,19 @@ export default function Home() {
       
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md border-b border-border/50 shadow-sm h-16 flex items-center justify-between px-4 md:px-8 max-w-7xl mx-auto w-full rounded-b-2xl mt-0 md:mt-2 md:w-[95%]">
-        <div className="flex items-center gap-4 md:gap-8">
-          <span className="text-2xl font-serif font-bold text-primary tracking-tight">PulpoMusic</span>
-          <div className="hidden sm:flex items-center gap-2 bg-red-50 px-3 py-1 rounded-full border border-red-100">
-            <Clock className="w-4 h-4 text-red-500 animate-pulse" />
-            <span className="text-xs font-bold text-red-600 uppercase tracking-wider">Oferta termina en:</span>
-            <CountdownTimer />
+        <div className="flex items-center gap-2 md:gap-8 w-full justify-between md:justify-start">
+          <span className="text-xl md:text-2xl font-serif font-bold text-primary tracking-tight">PulpoMusic</span>
+          <div className="flex flex-col md:flex-row items-end md:items-center gap-0.5 md:gap-2 bg-red-50 px-2 md:px-3 py-1 rounded-lg md:rounded-full border border-red-100 scale-90 md:scale-100 origin-right">
+            <div className="flex items-center gap-1">
+              <Clock className="w-3 h-3 md:w-4 md:h-4 text-red-500 animate-pulse" />
+              <span className="text-[10px] md:text-xs font-bold text-red-600 uppercase tracking-wider hidden md:inline">Oferta termina en:</span>
+              <CountdownTimer />
+            </div>
+            <div className="flex items-center gap-1">
+               <span className="text-[10px] md:text-xs font-bold text-green-600 bg-green-100 px-1.5 rounded flex items-center gap-1">
+                 <Truck className="w-3 h-3" /> Envíos Gratis
+               </span>
+            </div>
           </div>
         </div>
         <Button 
