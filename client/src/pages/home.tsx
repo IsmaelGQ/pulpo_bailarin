@@ -194,7 +194,7 @@ const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (o
     e.preventDefault();
     const selectedPrice = prices[formData.quantity as keyof typeof prices];
     const message = `Hola, quiero pedir el Pulpo Bailarín con la oferta navideña. 🐙🎁%0A%0A*Mi Pedido:*%0A📦 Cantidad: ${selectedPrice.label}%0A🎨 Color: ${formData.color}%0A💰 Precio Total: S/ ${selectedPrice.price}%0A%0A*Mis Datos:*%0A👤 Nombre: ${formData.fullName}%0A📍 Departamento: ${formData.department}%0A🏙️ Provincia: ${formData.province}%0A🏘️ Distrito: ${formData.district}%0A🏠 Dirección/Ref: ${formData.address}`;
-    window.open(`https://wa.me/51954597114?text=${message}`, '_blank');
+    window.open(`https://wa.me/51969741522?text=${message}`, '_blank');
     onOpenChange(false);
   };
 
@@ -741,7 +741,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto bg-white/10 backdrop-blur-md rounded-[3rem] border border-white/20 p-8 md:p-12 shadow-2xl">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div className="order-2 md:order-1 text-center md:text-left">
-                <div className="inline-flex items-center gap-2 px-4 py-1 bg-secondary text-secondary-foreground rounded-full text-sm font-bold mb-6 animate-pulse">
+                <div className="inline-flex items-center gap-2 px-4 py-1 bg-transparent md:bg-secondary border-2 border-secondary text-secondary md:text-secondary-foreground rounded-full text-sm font-bold mb-6 animate-pulse">
                   <Clock className="w-4 h-4" /> ¡Oferta Limitada de Navidad!
                 </div>
                 <h2 className="text-4xl md:text-5xl font-serif font-bold mb-4">
