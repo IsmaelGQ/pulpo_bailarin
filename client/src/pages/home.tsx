@@ -486,11 +486,8 @@ export default function Home() {
 
                 {/* Content */}
                 <div className="relative z-10 p-8 text-white">
-                  <div className="w-14 h-14 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center mb-4 border border-white/30">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-2xl font-serif font-bold mb-3">{feature.title}</h3>
-                  <p className="text-white/90 leading-relaxed font-medium">{feature.desc}</p>
+                  <h3 className="text-2xl font-serif font-bold mb-3 drop-shadow-lg" style={{ textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)' }}>{feature.title}</h3>
+                  <p className="text-white/90 leading-relaxed font-medium drop-shadow-md" style={{ textShadow: '0 1px 4px rgba(0, 0, 0, 0.6)' }}>{feature.desc}</p>
                 </div>
               </motion.div>
             ))}
