@@ -218,7 +218,7 @@ const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (o
             <Label>Elige la Oferta</Label>
             <div className="grid gap-2">
               {Object.entries(prices).map(([qty, details]) => (
-                <div key={qty} className={`relative flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.quantity === qty ? 'border-primary bg-primary/5' : 'border-gray-100 hover:border-primary/30'}`} onClick={() => setFormData({...formData, quantity: qty})}>
+                <div key={qty} className={`relative flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.quantity === qty ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}`} onClick={() => setFormData({...formData, quantity: qty})}>
                   <div className="flex items-center gap-3">
                     <input 
                       type="radio" 
@@ -226,7 +226,7 @@ const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (o
                       value={qty} 
                       checked={formData.quantity === qty}
                       onChange={handleChange}
-                      className="w-4 h-4 text-primary border-gray-300 focus:ring-primary"
+                      className="w-4 h-4 text-blue-500 border-gray-300 focus:ring-blue-500"
                     />
                     <div className="flex flex-col">
                       <span className="font-bold text-gray-900">{details.label}</span>
@@ -234,7 +234,7 @@ const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (o
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-bold text-lg text-primary">S/ {details.price}</div>
+                    <div className="font-bold text-lg text-blue-600">S/ {details.price}</div>
                     <div className="text-sm text-gray-400 line-through">S/ {details.oldPrice}</div>
                   </div>
                 </div>
@@ -250,7 +250,7 @@ const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (o
                 <div 
                   key={color}
                   onClick={() => setFormData({...formData, color})}
-                  className={`flex-1 p-3 rounded-xl border-2 cursor-pointer text-center transition-all ${formData.color === color ? 'border-primary bg-primary text-white' : 'border-gray-100 hover:border-gray-200'}`}
+                  className={`flex-1 p-3 rounded-xl border-2 cursor-pointer text-center transition-all ${formData.color === color ? 'border-blue-500 bg-blue-50 text-blue-900 font-bold' : 'border-gray-200 hover:border-gray-300'}`}
                 >
                   <div className="font-medium text-sm">{color}</div>
                 </div>
