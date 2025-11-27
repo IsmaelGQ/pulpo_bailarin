@@ -283,7 +283,7 @@ const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (o
           <Button type="submit" size="lg" className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold gap-2 mt-4 flex flex-col items-center justify-center h-auto py-3">
             <div className="flex items-center gap-2">
               <MessageCircle className="w-5 h-5" /> 
-              <span>Hacer Pedido Ahora 🎁</span>
+              <span>Hacer Pedido Ahora 🎁 - S/ {prices[formData.quantity as keyof typeof prices].price}</span>
             </div>
             <span className="text-sm font-bold mt-1">¡Envío TOTALMENTE GRATIS!</span>
           </Button>
