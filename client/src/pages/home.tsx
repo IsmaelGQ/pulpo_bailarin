@@ -431,6 +431,71 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Problems Section - Multiple Pain Points */}
+      <section className="py-20 bg-gradient-to-b from-white to-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6 text-foreground">
+              Problemas que Enfrentan los Papás
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Estos son los principales desafíos que resolvemos con Pulpo Bailarín Musical
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                problem: "El bebé no gatea",
+                solution: "Motívalo a moverse persiguiendo un juguete interactivo",
+                icon: "🚼"
+              },
+              {
+                problem: "Juguetes aburridos",
+                solution: "Estimulación constante con movimiento, luces y música",
+                icon: "😴"
+              },
+              {
+                problem: "Poco estímulo sensorial",
+                solution: "Desarrollo multisensorial completo en un solo juguete",
+                icon: "👀"
+              },
+              {
+                problem: "Falta de coordinación",
+                solution: "Entrena motricidad gruesa mientras se divierte",
+                icon: "🤸"
+              },
+              {
+                problem: "Bebé inquieto y llorón",
+                solution: "Ocupado y feliz mientras el pulpo entretiene",
+                icon: "😊"
+              },
+              {
+                problem: "Pantallas todo el día",
+                solution: "Juego físico real, sin componentes electrónicos peligrosos",
+                icon: "📵"
+              }
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all border border-border/50 group hover:border-primary/30"
+              >
+                <div className="text-4xl mb-4">{item.icon}</div>
+                <h3 className="text-xl font-serif font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                  {item.problem}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  ✓ {item.solution}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Interest Section */}
       <section id="features" className="py-20 bg-white">
