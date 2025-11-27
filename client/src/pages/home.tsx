@@ -280,9 +280,18 @@ const PurchaseModal = ({ open, onOpenChange }: { open: boolean, onOpenChange: (o
             <Label htmlFor="address">Dirección Exacta / Referencia</Label>
             <Textarea id="address" name="address" required placeholder="Av. Larco 123, frente al parque..." value={formData.address} onChange={handleChange} />
           </div>
-          <Button type="submit" size="lg" className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold gap-2 mt-2">
-            <MessageCircle className="w-5 h-5" /> Pedir Ahora (S/ {prices[formData.quantity as keyof typeof prices].price})
+          <Button type="submit" size="lg" className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold gap-2 mt-4 flex flex-col items-center justify-center h-auto py-3">
+            <div className="flex items-center gap-2">
+              <MessageCircle className="w-5 h-5" /> 
+              <span>Hacer Pedido Ahora 🎁</span>
+            </div>
+            <span className="text-sm font-bold mt-1">¡Envío TOTALMENTE GRATIS!</span>
           </Button>
+          <img 
+            src="https://res.cloudinary.com/ddv1tjskb/image/upload/v1764218519/bancos_xmeiie.avif" 
+            alt="Métodos de pago" 
+            className="w-full mt-4 rounded-lg"
+          />
         </form>
       </DialogContent>
     </Dialog>
